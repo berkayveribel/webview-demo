@@ -32,6 +32,7 @@ class UrlPage extends StatelessWidget {
         children: [
           _buildUrlInput(),
           _buildGoUrlButton(),
+          _buildGoImakReduktorButton(),
         ],
       ),
     );
@@ -70,5 +71,16 @@ class UrlPage extends StatelessWidget {
           // valide olmadıysa - hiç bir şey yapma
         },
         child: Text('GİT'));
+  }
+
+  _buildGoImakReduktorButton() {
+    return ElevatedButton(
+        onPressed: () {
+          // webview sayfasında açacağımız url -> http://iguide.imakreduktor.com/?lang=tr
+          urlController.setUrl = 'http://iguide.imakreduktor.com/?lang=tr';
+          // webview sayfasına gidelim
+          Get.toNamed(Routes.webViewPage);
+        },
+        child: Text('İMAK Reduktöre git'));
   }
 }

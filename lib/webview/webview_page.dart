@@ -6,6 +6,9 @@ class WebViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(UrlController.to.getUrl.value ?? 'https://google.com.tr'),
+      ),
       body: SafeArea(child: _buildBody()),
     );
   }
