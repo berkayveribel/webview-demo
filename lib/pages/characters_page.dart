@@ -29,10 +29,11 @@ class CharactersPage extends StatelessWidget {
 
         final data = state?.value;
         return GridView.builder(
+          controller: controller.scrollController,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
-          itemCount: 20,
+          itemCount: data?.data?.results?.length,
           itemBuilder: (BuildContext context, int index) {
             return CharacterCard(
               result: data?.data?.results?[index],
