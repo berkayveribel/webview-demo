@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marvel_app/binds.dart';
 import 'package:marvel_app/pages/characters_page.dart';
+import 'package:marvel_app/route_manager.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -13,8 +14,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: CharactersPage(),
+      //home: CharactersPage(),
       //initialBinding: Binds(), // ? çalışmıyor
+      onGenerateRoute: RouteManager.onGenerateRoute,
     );
   }
 }
