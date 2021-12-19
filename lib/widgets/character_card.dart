@@ -25,11 +25,12 @@ class CharacterCard extends StatelessWidget {
 
   Widget _buildImage() {
     final thumbnail = result?.thumbnail;
+    final imagePath = '${thumbnail?.path}.${thumbnail?.ext}';
     return Row(
       children: [
         Expanded(
           child: Image.network(
-            '${thumbnail?.path}.${thumbnail?.ext}',
+            imagePath,
             fit: BoxFit.cover,
           ),
         ),

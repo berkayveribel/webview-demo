@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marvel_app/controllers/character_detail_controller.dart';
+import 'package:marvel_app/controllers/controllers_barrel.dart';
 import 'package:marvel_app/data/repository/marvel_repository.dart';
 import 'package:marvel_app/widgets/widgets_barrel.dart';
 
@@ -8,13 +8,12 @@ class CharacterDetailPage extends StatelessWidget {
   CharacterDetailPage({Key? key}) : super(key: key);
 
   final controller = Get.put(CharacterDetailController(MarvelRepository()));
+  final comicsController = Get.put(ComicsListController(MarvelRepository()));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Detaillllllllll',
-      ),
+      appBar: _buildAppBar(),
       body: SafeArea(
         child: _buildBody(),
       ),
@@ -25,6 +24,9 @@ class CharacterDetailPage extends StatelessWidget {
     return Column(
       children: [
         Expanded(child: _buildCharacterCard()),
+        Expanded(
+          child: _buildComics(),
+        ),
       ],
     );
   }
@@ -45,7 +47,27 @@ class CharacterDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildComicsByCharacter() {
-    return Text('Comics by Character');
+  PreferredSizeWidget _buildAppBar() {
+    return const CustomAppBar(
+      title: 'CharacterDetail',
+    );
+  }
+
+  Widget _buildComics() {
+    return comicsController.obx(
+      (state) {
+        final comics = state?.value?.data?.results;
+        return ListView.builder(
+          itemCount: comics?.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              child: Text('Title ${comics?[index].title}'),
+            );
+          },
+        );
+      },
+      onEmpty: const OnEmpty(message: 'Comics not found'),
+      onError: (e) => OnError(message: e!),
+    );
   }
 }
