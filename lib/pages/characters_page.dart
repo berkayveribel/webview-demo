@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marvel_app/controllers/character_list_controller.dart';
+import 'package:marvel_app/route_manager.dart';
 import 'package:marvel_app/widgets/character_card.dart';
 
 class CharactersPage extends StatelessWidget {
@@ -35,8 +36,16 @@ class CharactersPage extends StatelessWidget {
           ),
           itemCount: data?.data?.results?.length,
           itemBuilder: (BuildContext context, int index) {
-            return CharacterCard(
-              result: data?.data?.results?[index],
+            final singleCharacter = data?.data?.results?[index];
+
+            debugPrint('single Character id ${singleCharacter?.id}');
+
+            return InkWell(
+              onTap: () => Get.toNamed(Routes.characterDetail,
+                  arguments: singleCharacter?.id),
+              child: CharacterCard(
+                result: singleCharacter,
+              ),
             );
           },
         );

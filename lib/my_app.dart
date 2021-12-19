@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: CharactersPage(),
       //initialBinding: Binds(), // ? çalışmıyor
-      onGenerateRoute: RouteManager.onGenerateRoute,
+      initialRoute: Routes.characters,
+      getPages: Routes.getPages,
     );
   }
 }

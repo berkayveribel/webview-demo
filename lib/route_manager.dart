@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:marvel_app/pages/character_detail_page.dart';
 import 'package:marvel_app/pages/characters_page.dart';
 
-class RouteManager {
-  static const String charactersPage = '/';
+class Routes {
+  static const String characters = '/';
+  static const String characterDetail = '/character_detail';
 
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case charactersPage:
-        return MaterialPageRoute(builder: (_) => CharactersPage());
-      default:
-    }
-  }
+  static final List<GetPage> getPages = [
+    GetPage(name: characters, page: () => CharactersPage()),
+    GetPage(name: characterDetail, page: () => CharacterDetailPage()),
+  ];
 }
