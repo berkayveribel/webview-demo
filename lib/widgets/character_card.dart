@@ -17,7 +17,7 @@ class CharacterCard extends StatelessWidget {
         children: [
           Expanded(child: _buildImage()),
           _buildName(),
-          if (type == CharacterCardType.detail) _buildDescription(),
+          _buildDescription(),
         ],
       ),
     );
@@ -51,11 +51,14 @@ class CharacterCard extends StatelessWidget {
 
   _buildDescription() {
     final description = result?.description;
-    return Text(
-      '$description',
-      style: const TextStyle(
-        fontSize: 20.0,
-        fontWeight: FontWeight.w600,
+    return Visibility(
+      visible: type == CharacterCardType.detail,
+      child: Text(
+        '$description',
+        style: const TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

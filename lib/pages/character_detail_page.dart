@@ -12,7 +12,20 @@ class CharacterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildCharacterCard(),
+      appBar: CustomAppBar(
+        title: 'Detaillllllllll',
+      ),
+      body: SafeArea(
+        child: _buildBody(),
+      ),
+    );
+  }
+
+  Widget _buildBody() {
+    return Column(
+      children: [
+        Expanded(child: _buildCharacterCard()),
+      ],
     );
   }
 
