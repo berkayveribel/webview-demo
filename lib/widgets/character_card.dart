@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_app/data/models/result.dart';
 
-class CharacterCard extends StatelessWidget {
-  const CharacterCard({Key? key, this.result}) : super(key: key);
-  final Result? result;
+enum CharacterCardType { list, detail }
 
-  final dummyPhotoUrl =
-      'https://cdn.pixabay.com/photo/2017/11/26/00/46/captain-marvel-2977923__340.jpg';
+class CharacterCard extends StatelessWidget {
+  const CharacterCard(
+      {Key? key, required this.result, this.type = CharacterCardType.list})
+      : super(key: key);
+  final Result? result;
+  final CharacterCardType type;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +17,7 @@ class CharacterCard extends StatelessWidget {
         children: [
           Expanded(child: _buildImage()),
           _buildName(),
+          if (type == CharacterCardType.detail) _buildDescription(),
         ],
       ),
     );
@@ -43,6 +46,17 @@ class CharacterCard extends StatelessWidget {
         fontWeight: FontWeight.w600,
       ),
       maxLines: 1,
+    );
+  }
+
+  _buildDescription() {
+    final description = result?.description;
+    return Text(
+      '$description',
+      style: const TextStyle(
+        fontSize: 20.0,
+        fontWeight: FontWeight.w600,
+      ),
     );
   }
 }

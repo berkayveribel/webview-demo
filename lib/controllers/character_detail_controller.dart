@@ -21,8 +21,7 @@ class CharacterDetailController extends GetxController
   void onInit() {
     super.onInit();
     _initVariables();
-    debugPrint('gelen karakter id ${Get.arguments}');
-    // getSingleCharacter(characterId: Get.arguments);
+    getSingleCharacter(characterId: Get.arguments);
   }
 
   void _initVariables() {

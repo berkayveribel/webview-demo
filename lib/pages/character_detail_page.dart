@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marvel_app/controllers/character_detail_controller.dart';
 import 'package:marvel_app/data/repository/marvel_repository.dart';
+import 'package:marvel_app/widgets/widgets_barrel.dart';
 
 class CharacterDetailPage extends StatelessWidget {
   CharacterDetailPage({Key? key}) : super(key: key);
@@ -11,28 +12,17 @@ class CharacterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          _buildCharacterCard(),
-          _buildComicsByCharacter(),
-        ],
-      ),
+      body: _buildCharacterCard(),
     );
   }
 
   Widget _buildCharacterCard() {
     return controller.obx(
       (state) {
-        final data = state?.value?.data?.results?.length;
-        debugPrint('sonuçların boyutu $data');
-        return Card(
-          child: Column(
-            children: [
-              Text('Character Name'),
-              Text('Character Photo'),
-              Text('Character Desc'),
-            ],
-          ),
+        final result = state?.value?.data?.results?[0];
+        return CharacterCard(
+          result: result,
+          type: CharacterCardType.detail,
         );
       },
       onError: (e) => Center(
@@ -40,16 +30,6 @@ class CharacterDetailPage extends StatelessWidget {
       ),
       onEmpty: const Center(child: Text('İçerik bulunamadı')),
     );
-
-    /*   return Card(
-      child: Column(
-        children: [
-          Text('Character Name'),
-          Text('Character Photo'),
-          Text('Character Desc'),
-        ],
-      ),
-    ); */
   }
 
   Widget _buildComicsByCharacter() {

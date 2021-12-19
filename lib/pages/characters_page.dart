@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marvel_app/controllers/character_list_controller.dart';
+import 'package:marvel_app/controllers/controllers_barrel.dart';
 import 'package:marvel_app/route_manager.dart';
-import 'package:marvel_app/widgets/character_card.dart';
+
+import 'package:marvel_app/widgets/widgets_barrel.dart';
 
 class CharactersPage extends StatelessWidget {
   CharactersPage({Key? key}) : super(key: key);
@@ -38,8 +39,6 @@ class CharactersPage extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final singleCharacter = data?.data?.results?[index];
 
-            debugPrint('single Character id ${singleCharacter?.id}');
-
             return InkWell(
               onTap: () => Get.toNamed(Routes.characterDetail,
                   arguments: singleCharacter?.id),
@@ -50,8 +49,8 @@ class CharactersPage extends StatelessWidget {
           },
         );
       },
-      onEmpty: const Text('Boş geldi'),
-      onError: (e) => Text('$e'),
+      onEmpty: const OnEmpty(message: 'Character not found'),
+      onError: (e) => OnError(message: e!),
     );
   }
 }
