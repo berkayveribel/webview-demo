@@ -57,17 +57,40 @@ class CharacterDetailPage extends StatelessWidget {
     return comicsController.obx(
       (state) {
         final comics = state?.value?.data?.results;
-        return ListView.builder(
-          itemCount: comics?.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: Text('Title ${comics?[index].title}'),
-            );
-          },
+        return Column(
+          children: [
+            _buildComicsHeader(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: comics?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ComicsCard(
+                    comics: comics?[index],
+                  );
+                },
+              ),
+            ),
+          ],
         );
       },
       onEmpty: const OnEmpty(message: 'Comics not found'),
       onError: (e) => OnError(message: e!),
+    );
+  }
+
+  Widget _buildComicsHeader() {
+    return const SizedBox(
+      height: 40.0,
+      child: Center(
+        child: Text(
+          'Comics',
+          style: TextStyle(
+            fontSize: 22.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey,
+          ),
+        ),
+      ),
     );
   }
 }

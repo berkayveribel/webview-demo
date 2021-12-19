@@ -1,4 +1,5 @@
 import 'package:marvel_app/data/models/character_query_model.dart';
+import 'package:marvel_app/data/models/comics_query_model.dart';
 import 'package:marvel_app/data/models/comics_response.dart';
 import 'package:marvel_app/data/models/marvel_response.dart';
 import 'package:marvel_app/data/repository/base_service.dart';
@@ -26,9 +27,10 @@ class MarvelRepository {
   }
 
   Future<ComicsResponse> getComicsByCharacter(
-      {required int characterId}) async {
+      {required int characterId, required ComicsQueryModel queryParams}) async {
     final response = await _dio.get(
       '/v1/public/characters/$characterId/comics',
+      queryParameters: queryParams.toMap(),
     );
 
     return ComicsResponse.fromJson(response.data);
